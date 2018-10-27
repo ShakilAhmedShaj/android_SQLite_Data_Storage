@@ -1,6 +1,8 @@
 package com.t3ch.shaj.android_sqlite_data_storage;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     databaseHandler databaseHandler;
 
     private EditText nameEditText, ageEditText, genderEditText;
-    private Button addDataBTN;
+    private Button addDataBTN, showBTN;
 
 
     @Override
@@ -28,8 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ageEditText = findViewById(R.id.editTextAge);
         genderEditText = findViewById(R.id.editTextGender);
         addDataBTN = findViewById(R.id.addDataBTN);
+        showBTN = findViewById(R.id.showDataBTN);
 
         addDataBTN.setOnClickListener(this);
+        showBTN.setOnClickListener(this);
 
 
     }
@@ -53,6 +57,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
+        if (v.getId() == R.id.showDataBTN) {
+
+            Cursor cursor = databaseHandler.displayData();
+
+            if (cursor.getCount() == 0) {
+
+                showData("Error", "No Data Found");
+
+
+            } else {
+                StringBuffer stringBuffer = new StringBuffer();
+
+                while (cursor.moveToNext()) {
+                    stringBuffer.append("ID :" + cursor.getString(0) + "\n");
+                    stringBuffer.append("Name :" + cursor.getString(1) + "\n");
+                    stringBuffer.append("Age :" + cursor.getString(2) + "\n");
+                    stringBuffer.append("Gender :" + cursor.getString(3) + "\n\n");
+                }
+
+                showData("ResultSet", stringBuffer.toString());
+
+            }
+
+
+        }
+
+    }
+
+    private void showData(String title, String data) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(title);
+        builder.setMessage(data);
+        builder.setCancelable(true);
+        builder.show();
 
     }
 }
