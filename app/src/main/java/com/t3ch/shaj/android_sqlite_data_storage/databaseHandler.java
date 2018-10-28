@@ -115,8 +115,16 @@ public class databaseHandler extends SQLiteOpenHelper {
         contentValues.put(AGE, age);
         contentValues.put(GENDER, gender);
 
-        sqLiteDatabase.update(TABLE_NAME, contentValues, ID+"= ?", new String[]{id});
+        sqLiteDatabase.update(TABLE_NAME, contentValues, ID + "= ?", new String[]{id});
         return true;
+
+    }
+
+
+    public int deleteData(String id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        return sqLiteDatabase.delete(TABLE_NAME, ID + " = ?", new String[]{id});
 
     }
 

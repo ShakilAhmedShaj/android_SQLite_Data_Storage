@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     databaseHandler databaseHandler;
 
     private EditText nameEditText, ageEditText, genderEditText, idEditText;
-    private Button addDataBTN, showBTN, updateBTN;
+    private Button addDataBTN, showBTN, updateBTN, deleteBTN;
 
 
     @Override
@@ -34,10 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addDataBTN = findViewById(R.id.addDataBTN);
         showBTN = findViewById(R.id.showDataBTN);
         updateBTN = findViewById(R.id.updateDataBTN);
+        deleteBTN = findViewById(R.id.deleteDataBTN);
 
         addDataBTN.setOnClickListener(this);
         showBTN.setOnClickListener(this);
         updateBTN.setOnClickListener(this);
+        deleteBTN.setOnClickListener(this);
 
 
     }
@@ -96,6 +98,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), "Data Updated", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Data Update Failed", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } else if (v.getId() == R.id.deleteDataBTN) {
+
+            int value = databaseHandler.deleteData(id);
+
+            if (value > 0) {
+                Toast.makeText(getApplicationContext(), "Data Deleted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Data is Not Deleted", Toast.LENGTH_SHORT).show();
             }
 
 

@@ -91,7 +91,6 @@
         android:id="@+id/addDataBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="ADD DATA"
         android:textStyle="bold" />
 
@@ -100,6 +99,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="UPDATE DATA"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/deleteDataBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DELETE DATA"
+        android:textColor="#ff2f2f"
         android:textStyle="bold" />
 
 
