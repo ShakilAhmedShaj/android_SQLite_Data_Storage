@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     databaseHandler databaseHandler;
 
-    private EditText nameEditText, ageEditText, genderEditText;
-    private Button addDataBTN, showBTN;
+    private EditText nameEditText, ageEditText, genderEditText, idEditText;
+    private Button addDataBTN, showBTN, updateBTN;
 
 
     @Override
@@ -29,11 +29,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nameEditText = findViewById(R.id.editTextName);
         ageEditText = findViewById(R.id.editTextAge);
         genderEditText = findViewById(R.id.editTextGender);
+        idEditText = findViewById(R.id.editTextID);
+
         addDataBTN = findViewById(R.id.addDataBTN);
         showBTN = findViewById(R.id.showDataBTN);
+        updateBTN = findViewById(R.id.updateDataBTN);
 
         addDataBTN.setOnClickListener(this);
         showBTN.setOnClickListener(this);
+        updateBTN.setOnClickListener(this);
 
 
     }
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+        String id = idEditText.getText().toString();
         String name = nameEditText.getText().toString();
         String age = ageEditText.getText().toString();
         String gender = genderEditText.getText().toString();
@@ -81,7 +86,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
 
+        } else if (v.getId() == R.id.updateDataBTN)
+
+        {
+
+            Boolean isUpdated = databaseHandler.updateData(id, name, age, gender);
+
+            if (isUpdated == true) {
+                Toast.makeText(getApplicationContext(), "Data Updated", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Data Update Failed", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
+
 
     }
 
